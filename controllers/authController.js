@@ -8,7 +8,7 @@ exports.login = (req, res) => {
     const token = jwt.sign({ name }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
-    res.json({ token, name, password });
+    res.json({ token, name });
   } else {
     return res.status(400).json({
       error: "Incorrect password",
@@ -18,5 +18,5 @@ exports.login = (req, res) => {
 
 exports.requireSignin = expressjwt({
   secret: process.env.JWT_SECRET,
-  algorithms: ["RS256"],
+  algorithms: ["sha1", "RS256", "HS256"],
 });
