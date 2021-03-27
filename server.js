@@ -7,6 +7,7 @@ require("dotenv").config();
 
 // import router
 const studentRouter = require("./routes/postRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 
 // route middleware
 app.use("/api", studentRouter);
+app.use("/api", authRoutes);
 
 const port = process.env.PORT || 8000;
 

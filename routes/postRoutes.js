@@ -8,11 +8,18 @@ const {
   update,
   remove,
 } = require("../controllers/postConroller");
+const { requireSignin } = require("../controllers/authController");
 
-router.post("/post", create);
+router.post("/post", requireSignin, create);
 router.get("/posts", list);
 router.get("/post/:slug", read);
-router.put("/post/:slug", update);
-router.delete("/post/:slug", remove);
+router.put("/post/:slug", requireSignin, update);
+router.delete("/post/:slug", requireSignin, remove);
+
+// router.get("/secret", requireSignin, (req, res) => {
+//   res.json({
+//     data: req.user.name,
+//   });
+// });
 
 module.exports = router;
